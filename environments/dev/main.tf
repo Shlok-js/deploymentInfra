@@ -3,6 +3,7 @@ module "azurerm_resource_group" {
   rgs    = var.rgs
 }
 
+
 module "networking" {
   depends_on    = [module.azurerm_resource_group]
   source        = "../../modules/azurerm_networking"
