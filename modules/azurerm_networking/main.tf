@@ -5,6 +5,8 @@ resource "azurerm_virtual_network" "vnets" {
   resource_group_name = each.value.resource_group_name
   address_space       = each.value.address_space
 
+
+
   dynamic "subnet" {
     for_each = contains(keys(each.value), "subnets") ? each.value.subnets : {}
     content {
