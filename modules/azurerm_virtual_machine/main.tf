@@ -23,6 +23,7 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+
 resource "azurerm_network_security_group" "nsg" {
   for_each            = var.vms
   name                = "${each.key}-nsg"
