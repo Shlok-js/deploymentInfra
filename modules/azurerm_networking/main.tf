@@ -59,6 +59,7 @@ locals {
   }
 }
 
+
 resource "azurerm_bastion_host" "bastion" {
   for_each = { for k, v in var.vnets_subnets : k => v if v.enable_bastion == true }
 
