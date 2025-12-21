@@ -59,14 +59,15 @@ locals {
   }
 }
 
+
+
 resource "azurerm_bastion_host" "bastion" {
   for_each = { for k, v in var.vnets_subnets : k => v if v.enable_bastion == true }
 
   name                = "${each.key}-bastion"
   location            = var.vnets_subnets[each.key].location
   resource_group_name = var.vnets_subnets[each.key].resource_group_name
-
-
+  
   ip_configuration {
     name                 = "configuration"
     subnet_id            = local.snet_ids[each.key].AzureBastionSubnet

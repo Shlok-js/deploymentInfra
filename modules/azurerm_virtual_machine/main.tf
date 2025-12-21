@@ -18,10 +18,11 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = lookup(lookup(var.vnet_subnet_ids, each.value.vnet_name), each.value.subnet_name)
     private_ip_address_allocation = "Dynamic"
 
-    #Conditionally associate the public IP
+
     public_ip_address_id = lookup(lookup(azurerm_public_ip.pips, each.key, {}), "id", null)
   }
 }
+
 
 resource "azurerm_network_security_group" "nsg" {
   for_each            = var.vms
