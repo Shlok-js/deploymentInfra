@@ -5,6 +5,16 @@ resource "azurerm_virtual_network" "vnets" {
   resource_group_name = each.value.resource_group_name
   address_space       = each.value.address_space
 
+    lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [tags]
+  }
+  
+    timeouts {
+    create = "30m"
+    update = "30m"
+    delete = "30m"
+  }
 
 
   dynamic "subnet" {
@@ -15,6 +25,8 @@ resource "azurerm_virtual_network" "vnets" {
     }
   }
 }
+
+
 
 
 # resource "azurerm_subnet" "subnets" {
@@ -64,10 +76,12 @@ locals {
 resource "azurerm_bastion_host" "bastion" {
   for_each = { for k, v in var.vnets_subnets : k => v if v.enable_bastion == true }
 
+  # Ensure the vnet/subnet and public IP are created before the bastion host
+  
   name                = "${each.key}-bastion"
   location            = var.vnets_subnets[each.key].location
   resource_group_name = var.vnets_subnets[each.key].resource_group_name
-  
+
   ip_configuration {
     name                 = "configuration"
     subnet_id            = local.snet_ids[each.key].AzureBastionSubnet
