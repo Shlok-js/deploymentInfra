@@ -12,7 +12,6 @@ resource "azurerm_virtual_network" "vnets" {
   
     timeouts {
     create = "30m"
-    update = "30m"
     delete = "30m"
   }
 
