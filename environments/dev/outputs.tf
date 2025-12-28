@@ -11,8 +11,6 @@ output "vm_private_ips" {
 }
 
 output "vm_public_ips" {
-
-  
   value = module.vms.vm_public_ips
 }
 

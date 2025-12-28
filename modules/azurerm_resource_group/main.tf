@@ -4,7 +4,6 @@ resource "azurerm_resource_group" "rg" {
   location = each.value.location
 }
 
-
 output "rg_ids" {
   value = { for key, value in azurerm_resource_group.rg: value.name => value.id }
 }
