@@ -1,6 +1,6 @@
 rgs = {
   rg-dev-pompar = {
-    location = "Brazil South"++
+    location = "Brazil South"
   }
 }
 
@@ -81,4 +81,4 @@ vms = {
 #     backend_vms = ["frontendvm1", "frontendvm2"]
 #   }
 # }
-++++
+
