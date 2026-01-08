@@ -1,23 +1,23 @@
 rgs = {
-  rg-dev-pompu = {
-    location = "southcentralus"
+  rg-dev-pompar = {
+    location = "Brazil South"++
   }
 }
 
 vnets_subnets = {
-  vnet_pompu = {
-    location            = "southcentralus"
+  vnet_pompar = {
+    location = "Brazil South"
 
-    resource_group_name = "rg-dev-pompu"
-    
-    address_space       = ["10.0.0.0/16"]
+    resource_group_name = "rg-dev-pompar"
+
+    address_space = ["10.0.0.0/16"]
 
     enable_bastion = false
-    
     subnets = {
       frontend-subnet = {
         address_prefix = ["10.0.0.0/24"]
       }
+
       backend-subnet = {
         address_prefix = ["10.0.1.0/24"]
       }
@@ -30,11 +30,11 @@ vnets_subnets = {
 
 vms = {
   "frontendvm" = {
-    resource_group_name = "rg-dev-pompu"
-    location            = "southcentralus"
-    vnet_name           = "vnet_pompu"
+    resource_group_name = "rg-dev-pompar"
+    location            = "Brazil South"
+    vnet_name           = "vnet_pompar"
     subnet_name         = "frontend-subnet"
-    size                = "Standard_F2s_v2"
+    size                = "Standard_E2s_v3"
     admin_username      = "devopsadmin"
     admin_password      = "P@ssw01rd@123"
     inbound_open_ports  = [22, 80]
@@ -47,11 +47,11 @@ vms = {
     enable_public_ip = false
   }
   "backendvm" = {
-    resource_group_name = "rg-dev-pompu"
-    location            = "southcentralus"
-    vnet_name           = "vnet_pompu"
+    resource_group_name = "rg-dev-pompar"
+    location            = "Brazil South"
+    vnet_name           = "vnet_pompar"
     subnet_name         = "backend-subnet"
-    size                = "Standard_F2s_v2"
+    size                = "Standard_E2s_v3"
     admin_username      = "devopsadmin"
     admin_password      = "P@ssw01rd@123"
     inbound_open_ports  = [22, 80]
@@ -65,19 +65,20 @@ vms = {
   }
 }
 
-loadbalancers = {
-  lb-pompu = {
-    location                       = "southcentralus"
-    resource_group_name            = "rg-dev-pompu"
-    frontend_ip_configuration_name = "PublicIPAddress"
-    sku                            = "Standard"
-  }
-}
+# loadbalancers = {
+#   lb-pompar = {
+#     location                       = "southcentralus"
+#     resource_group_name            = "rg-dev-pompar"
+#     frontend_ip_configuration_name = "PublicIPAddress"
+#     sku                            = "Standard"
+#   }
+# }
 
-backend_pools = {
-  frontend-pool = {
-    port        = 80
-    lb_name     = "lb-pompu"
-    backend_vms = ["frontendvm1", "frontendvm2"]
-  }
-}
+# backend_pools = {
+#   frontend-pool = {
+#     port        = 80
+#     lb_name     = "lb-pompar"
+#     backend_vms = ["frontendvm1", "frontendvm2"]
+#   }
+# }
+++++
