@@ -1,3 +1,3 @@
 
-# variable "vms" {}
-# variable "vnet_subnet_ids" {}
+variable "vms" {}
+variable "vnet_subnet_ids" {}
