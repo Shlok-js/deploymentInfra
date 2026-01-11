@@ -11,7 +11,10 @@ module "networking" {
   vnets_subnets = var.vnets_subnets
 }
 
+
+
 module "vms" {
+  
   depends_on      = [module.azurerm_resource_group, module.networking]
   source          = "../../modules/azurerm_virtual_machine"
   vms             = var.vms
