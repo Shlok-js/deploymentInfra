@@ -1,9 +1,10 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "bootstrap"
-    storage_account_name = "pompya"
+    resource_group_name  = "rg-dont-delete"
+    storage_account_name = "bhagadbilla"
     container_name       = "tfstate"
 
     key = "deploymentInfra.tfstate"
   }
 }
+
