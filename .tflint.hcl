@@ -3,10 +3,23 @@ plugin "terraform" {
   preset  = "recommended"
 }
 
+# Do NOT block CI yet
 rule "terraform_required_version" {
-  enabled = false
+  enabled  = true
+  severity = "warning"
 }
 
 rule "terraform_required_providers" {
-  enabled = false
+  enabled  = true
+  severity = "warning"
+}
+
+rule "terraform_typed_variables" {
+  enabled  = true
+  severity = "warning"
+}
+
+rule "terraform_deprecated_lookup" {
+  enabled  = true
+  severity = "warning"
 }
