@@ -73,7 +73,7 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform plan -var-file="dev.terraform.tfvars"
+        run: terraform plan -lock=false -var-file="dev.terraform.tfvars"
 
 
   # -----------------------------------------
@@ -105,4 +105,4 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform apply -var-file="dev.terraform.tfvars" --auto-approve
+        run: terraform apply -lock-timeout=120s -var-file="dev.terraform.tfvars" --auto-approve
