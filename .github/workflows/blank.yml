@@ -9,6 +9,10 @@ on:
     branches:
       - main
 
+concurrency: 
+  group: terraform-dev-${{ github.ref_name }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   id-token: write
@@ -42,6 +46,31 @@ jobs:
         run: terraform validate
 
   # -----------------------------------------
+  # TFLINT JOB 
+  # -----------------------------------------
+
+  terraform-lint:
+    name: Terraform TFLint
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+  
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        
+      - name: Setup TfLint
+        uses: terraform-linters/setup-tflint@v6.2.1
+
+      - name: Initialize TFLint plugins
+        run: tflint --init
+
+      - name: Run TFLint
+        run: tflint --recursive
+
+  # -----------------------------------------
   # PLAN JOB (PUSH TO MAIN OR FEATURE)
   # -----------------------------------------
   terraform-plan:
@@ -69,7 +98,7 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform plan -var-file="dev.terraform.tfvars"
+        run: terraform plan -lock=false -var-file="dev.terraform.tfvars"
 
 
   # -----------------------------------------
@@ -101,4 +130,4 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform apply -var-file="dev.terraform.tfvars" --auto-approve
+        run: terraform apply -lock-timeout=120s -var-file="dev.terraform.tfvars" --auto-approve
