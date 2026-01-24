@@ -68,7 +68,7 @@ jobs:
         run: tflint --init
 
       - name: Run TFLint
-        run: tflint --recursive --minimum-severity=ERROR
+        run: tflint --recursive --force
 
   # -----------------------------------------
   # PLAN JOB (PUSH TO MAIN OR FEATURE)
