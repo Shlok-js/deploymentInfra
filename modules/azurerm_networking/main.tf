@@ -9,23 +9,26 @@ resource "azurerm_virtual_network" "vnets" {
     create_before_destroy = true
     ignore_changes        = [tags]
   }
-  
+
     timeouts {
     create = "30m"
-    
     delete = "30m"
   }
 
 
   dynamic "subnet" {
+
     for_each = contains(keys(each.value), "subnets") ? each.value.subnets : {}
     content {
+
       name           = subnet.key
+
       address_prefixes = subnet.value.address_prefix
     }
-  }
-}
 
+  }
+
+}
 
 
 
@@ -58,14 +61,17 @@ resource "azurerm_public_ip" "bastion-pip" {
   location            = var.vnets_subnets[each.key].location
   resource_group_name = var.vnets_subnets[each.key].resource_group_name
   allocation_method   = "Static"
+
   sku                 = "Standard"
 }
 
 locals {
   snet_ids = {
+
     for vnet_name, vnet_data in azurerm_virtual_network.vnets :
     vnet_data.name => {
       for subnet in vnet_data.subnet :
+
       subnet.name => subnet.id
     }
   }
