@@ -17,14 +17,18 @@ resource "azurerm_virtual_network" "vnets" {
 
 
   dynamic "subnet" {
+
     for_each = contains(keys(each.value), "subnets") ? each.value.subnets : {}
     content {
+
       name           = subnet.key
+
       address_prefixes = subnet.value.address_prefix
     }
-  }
-}
 
+  }
+
+}
 
 
 
