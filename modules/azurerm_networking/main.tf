@@ -22,9 +22,7 @@ resource "azurerm_virtual_network" "vnets" {
       name           = subnet.key
       address_prefixes = subnet.value.address_prefix
     }
-
   }
-  
 }
 
 
