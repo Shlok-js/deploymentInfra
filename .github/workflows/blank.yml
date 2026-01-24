@@ -68,7 +68,7 @@ jobs:
         run: tflint --init
 
       - name: Run TFLint
-        run: tflint --recursive --config=./environments/dev/.tflint.hcl
+        run: tflint --recursive
 
   # -----------------------------------------
   # PLAN JOB (PUSH TO MAIN OR FEATURE)
