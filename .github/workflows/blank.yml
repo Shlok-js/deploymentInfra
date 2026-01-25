@@ -47,6 +47,27 @@ jobs:
 
   # -----------------------------------------
   # TFLINT JOB 
+  # ----------------------------------------
+  terraform-checkov:
+    name: Terraform Checkov
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v
+    
+      - name: Checkov GitHub Action
+        uses: bridgecrewio/checkov-action@v12.1347.0
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          directory: .
+          framework: terraform
+          soft_fail: true  
+
+  # -----------------------------------------
+  # TFLINT JOB 
   # -----------------------------------------
 
   terraform-lint:
@@ -76,6 +97,7 @@ jobs:
   terraform-plan:
     name: Terraform Plan
     if: github.event_name != 'pull_request'
+    needs: terraform-lint
     runs-on: ubuntu-latest
 
     steps:
