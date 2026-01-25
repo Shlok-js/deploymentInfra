@@ -8,13 +8,12 @@ resource "azurerm_public_ip" "pips" {
 }
 
 resource "azurerm_network_interface" "nic" {
+
   depends_on          = [azurerm_public_ip.pips]
   for_each            = var.vms
   name                = "${each.key}-nic"
-
   location            = each.value.location
   resource_group_name = each.value.resource_group_name
-
   ip_configuration {
     name                          = "internal"
     subnet_id                     = lookup(lookup(var.vnet_subnet_ids, each.value.vnet_name), each.value.subnet_name)
@@ -27,6 +26,7 @@ resource "azurerm_network_interface" "nic" {
 resource "azurerm_network_security_group" "nsg" {
   for_each            = var.vms
   name                = "${each.key}-nsg"
+  
   location            = each.value.location
   resource_group_name = each.value.resource_group_name
 
