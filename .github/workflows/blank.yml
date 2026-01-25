@@ -46,15 +46,15 @@ jobs:
         run: terraform validate
 
   # -----------------------------------------
-  # TFLINT JOB 
+  # teraform Checkov
   # ----------------------------------------
   terraform-checkov:
-    name: Terraform Checkov
+    name: Terraform-Checkov
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v
+        uses: actions/checkout@v4
     
       - name: Checkov GitHub Action
         uses: bridgecrewio/checkov-action@v12.1347.0
@@ -98,6 +98,7 @@ jobs:
     name: Terraform Plan
     if: github.event_name != 'pull_request'
     needs: terraform-lint
+    name: Terraform-Checkov
     runs-on: ubuntu-latest
 
     steps:
