@@ -94,8 +94,9 @@ jobs:
   terraform-plan:
     name: Terraform Plan
     if: github.event_name != 'pull_request'
-    needs: terraform-lint
-    name: Terraform-Checkov
+    needs: 
+      - terraform-lint
+      - terraform-checkov
     runs-on: ubuntu-latest
 
     steps:
