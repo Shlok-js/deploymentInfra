@@ -58,9 +58,6 @@ jobs:
     
       - name: Checkov GitHub Action
         uses: bridgecrewio/checkov-action@v12.1347.0
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
         with:
           directory: .
           framework: terraform
