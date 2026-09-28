@@ -1,8 +1,8 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "rg-dont-delete"
+    resource_group_name  = "do-not-delete"
 
-    storage_account_name = "bhagadbilla" 
+    storage_account_name = "saunaccount" 
 
     container_name       = "tfstate"
     
