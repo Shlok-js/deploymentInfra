@@ -28,42 +28,59 @@ vnets_subnets = {
   }
 }
 
-vms = {
-  "frontendvm" = {
-    resource_group_name = "rg-dev-pompar"
+aks_clusters = {
+  "aks-dev-pompar" = {
     location            = "Brazil South"
-    vnet_name           = "vnet_pompar"
-    subnet_name         = "frontend-subnet"
-    size                = "Standard_E2s_v3"
-    admin_username      = "devopsadmin"
-    admin_password      = "P@ssw01rd@123"
-    inbound_open_ports  = [22, 80]
-    source_image_reference = {
-      publisher = "Canonical"
-      offer     = "0001-com-ubuntu-server-focal"
-      sku       = "20_04-lts"
-      version   = "latest"
-    }
-    enable_public_ip = false
-  }
-  "backendvm" = {
     resource_group_name = "rg-dev-pompar"
-    location            = "Brazil South"
+    dns_prefix          = "aksdevpompar"
+    kubernetes_version  = "1.27.3" # Update to your preferred supported version
     vnet_name           = "vnet_pompar"
     subnet_name         = "backend-subnet"
-    size                = "Standard_E2s_v3"
-    admin_username      = "devopsadmin"
-    admin_password      = "P@ssw01rd@123"
-    inbound_open_ports  = [22, 80]
-    source_image_reference = {
-      publisher = "Canonical"
-      offer     = "0001-com-ubuntu-server-focal"
-      sku       = "20_04-lts"
-      version   = "latest"
+    
+    default_node_pool = {
+      name       = "default"
+      node_count = 2
+      vm_size    = "Standard_DS2_v2"
     }
-    enable_public_ip = true
   }
 }
+
+# vms = {
+#   "frontendvm" = {
+#     resource_group_name = "rg-dev-pompar"
+#     location            = "Brazil South"
+#     vnet_name           = "vnet_pompar"
+#     subnet_name         = "frontend-subnet"
+#     size                = "Standard_E2s_v3"
+#     admin_username      = "devopsadmin"
+#     admin_password      = "P@ssw01rd@123"
+#     inbound_open_ports  = [22, 80]
+#     source_image_reference = {
+#       publisher = "Canonical"
+#       offer     = "0001-com-ubuntu-server-focal"
+#       sku       = "20_04-lts"
+#       version   = "latest"
+#     }
+#     enable_public_ip = false
+#   }
+#   "backendvm" = {
+#     resource_group_name = "rg-dev-pompar"
+#     location            = "Brazil South"
+#     vnet_name           = "vnet_pompar"
+#     subnet_name         = "backend-subnet"
+#     size                = "Standard_E2s_v3"
+#     admin_username      = "devopsadmin"
+#     admin_password      = "P@ssw01rd@123"
+#     inbound_open_ports  = [22, 80]
+#     source_image_reference = {
+#       publisher = "Canonical"
+#       offer     = "0001-com-ubuntu-server-focal"
+#       sku       = "20_04-lts"
+#       version   = "latest"
+#     }
+#     enable_public_ip = true
+#   }
+# }
 
 # loadbalancers = {
 #   lb-pompar = {
