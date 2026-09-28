@@ -7,6 +7,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = each.value.dns_prefix
   kubernetes_version  = each.value.kubernetes_version
 
+  # Add this block to fix the error
+  node_provisioning_profile {
+    mode = "Manual"
+  }
+
   # Best Practice: SystemAssigned identity is preferred over Service Principals
   identity {
     type = "SystemAssigned"
