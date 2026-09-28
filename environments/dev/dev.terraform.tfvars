@@ -33,7 +33,7 @@ aks_clusters = {
     location            = "Brazil South"
     resource_group_name = "rg-dev-pompar"
     dns_prefix          = "aksdevpompar"
-    kubernetes_version  = "1.27.3" # Update to your preferred supported version
+    kubernetes_version  = "1.36.4" # Update to your preferred supported version
     vnet_name           = "vnet_pompar"
     subnet_name         = "backend-subnet"
     
