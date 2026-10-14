@@ -1,12 +1,12 @@
 rgs = {
   rg-dev-pompar = {
-    location = "Brazil South"
+    location = "East US"
   }
 }
 
 vnets_subnets = {
   vnet_pompar = {
-    location = "Brazil South"
+    location = "East US"
 
     resource_group_name = "rg-dev-pompar"
 
@@ -30,7 +30,7 @@ vnets_subnets = {
 
 aks_clusters = {
   "aks-dev-pompar" = {
-    location            = "Brazil South"
+    location            = "East US"
     resource_group_name = "rg-dev-pompar"
     dns_prefix          = "aksdevpompar"
     kubernetes_version  = "1.36.4" # Update to your preferred supported version
@@ -48,7 +48,7 @@ aks_clusters = {
 # vms = {
 #   "frontendvm" = {
 #     resource_group_name = "rg-dev-pompar"
-#     location            = "Brazil South"
+#     location            = "East US"
 #     vnet_name           = "vnet_pompar"
 #     subnet_name         = "frontend-subnet"
 #     size                = "Standard_E2s_v3"
@@ -65,7 +65,7 @@ aks_clusters = {
 #   }
 #   "backendvm" = {
 #     resource_group_name = "rg-dev-pompar"
-#     location            = "Brazil South"
+#     location            = "East US"
 #     vnet_name           = "vnet_pompar"
 #     subnet_name         = "backend-subnet"
 #     size                = "Standard_E2s_v3"
